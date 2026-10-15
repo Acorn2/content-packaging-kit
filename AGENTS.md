@@ -1,6 +1,6 @@
 # 项目约定
 
-本项目是 `SKILL.md` 驱动的 Codex Skill，没有独立应用、构建服务或 API。运行行为主要由提示词、参考文件和 UI 调用提示共同决定。
+本项目“看点工坊”（Content Packaging Kit）是 `SKILL.md` 驱动的 Codex Skill，标识为 `content-packaging-kit`。没有独立应用、构建服务或 API；运行行为主要由提示词、参考文件和 UI 调用提示共同决定。维护当前产品名称时保留上游项目的原名、链接与许可署名。
 
 - `SKILL.md`：任务路由、默认行为、输入输出和单平台更新范围。
 - `references/title-strategy.md`、`headline-formulas.md`、`search-intent.md`：标题创意、力度和关键词方法；`platforms.md` 与 `output.md` 管平台字段和交付格式。
