@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><title>视频封面</title>
+<style>
+@font-face{font-family:CoverSans;src:url("__FONT_URL__") format("woff2");font-weight:100 900;font-display:block}
+*{box-sizing:border-box}html,body{margin:0;padding:0}body{font-family:CoverSans,sans-serif;background:var(--bg);color:var(--ink)}
+.cover{position:relative;overflow:hidden;background:var(--bg)}
+.category,.copy,.hero,.secondary,.signature,.link-arrow{position:absolute}
+.category{display:flex;align-items:center;gap:16px;font-weight:600;color:var(--accent);white-space:nowrap}
+.category:before{content:"";width:26px;height:6px;background:var(--accent);flex:none}
+.copy{display:flex;flex-direction:column;gap:var(--copy-gap,40px)}
+/* Fixed insets preserve the text safety margin and the gap to artwork after rotation. */
+.headline{margin:0;font-weight:900;line-height:1.18;letter-spacing:-.025em;transform:translateX(2px) rotate(-2deg);transform-origin:top left}
+.headline span{display:table;white-space:nowrap;position:relative;isolation:isolate}
+.headline .emphasis{color:var(--accent);margin-top:12px}
+.headline .emphasis:after{content:"";position:absolute;left:-2%;right:-2%;height:21%;bottom:5%;background:var(--marker);border-radius:35% 24% 30% 20% / 18% 35% 22% 32%;z-index:-1}
+.subhead{margin:0;font-weight:500;line-height:1.5;color:var(--muted);max-width:100%;white-space:pre-wrap}
+.hero,.secondary{display:flex;align-items:center;justify-content:center}
+.hero{padding-left:12px}
+.hero img,.secondary img{display:block;width:100%;height:100%;object-fit:contain}
+.link-arrow{overflow:visible;pointer-events:none}
+.hero.window{padding:95px 40px 35px;border:2px solid var(--accent);border-radius:20px;background:var(--surface)}
+.window-bar{display:none;position:absolute;top:0;left:0;right:0;height:78px;border-bottom:2px solid var(--accent);align-items:center;padding:0 28px;gap:12px;color:var(--muted);font-size:26px;font-weight:500}
+.window .window-bar{display:flex}.window-dot{width:11px;height:11px;border-radius:50%;background:var(--accent);opacity:.5}
+.domain{margin-left:14px}.signature{display:flex;align-items:center;gap:20px;font-weight:600;white-space:nowrap}
+.signature:before{content:"";width:44px;height:3px;background:var(--accent)}
+</style></head><body>
+<main class="cover" id="cover">
+ <div class="category" data-check="category"></div>
+ <div class="copy"><h1 class="headline"><span data-check="headline-1"></span><span class="emphasis" data-check="headline-2"></span></h1><p class="subhead" data-check="subhead"></p></div>
+ <div class="hero"><div class="window-bar"><i class="window-dot"></i><i class="window-dot"></i><i class="window-dot"></i><span class="domain" data-check="domain"></span></div><img alt="主题示意插画"></div>
+ <div class="secondary"><img alt="辅助主题插画"></div>
+ <svg class="link-arrow" viewBox="0 0 200 200" aria-hidden="true"><path d="M15 183 C115 170 172 105 172 30" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-dasharray="13 14"></path><path d="M151 48 L172 22 L190 50" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+ <div class="signature" data-check="signature"></div>
+</main>
+<script>
+const data=__COVER_DATA__;
+const {brand,candidate,format}=data;
+const root=document.documentElement;
+for(const [name,color] of Object.entries(brand.palette))root.style.setProperty('--'+name,color);
+const cover=document.querySelector('.cover');cover.style.width=format.width+'px';cover.style.height=format.height+'px';
+function box(selector,rect){const el=document.querySelector(selector);for(const [key,value] of Object.entries(rect))el.style[key]=value+'px';return el}
+box('.category',format.category).textContent=candidate.category;
+box('.copy',format.copy);root.style.setProperty('--copy-gap',(format.copyGap??40)+'px');
+document.querySelector('.headline').style.fontSize=format.headlineSize+'px';
+document.querySelector('.headline').style.lineHeight=String(format.headlineLeading??1.18);
+document.querySelector('.headline .emphasis').style.fontSize=(format.emphasisSize??format.headlineSize)+'px';
+document.querySelectorAll('.headline span').forEach((el,i)=>el.textContent=candidate.headline[i]);
+const sub=document.querySelector('.subhead');sub.textContent=candidate.subhead;sub.style.fontSize=format.subheadSize+'px';
+const hero=box('.hero',format.hero);hero.classList.toggle('window',candidate.layout==='window');
+hero.querySelector('img').src=candidate.asset;
+hero.querySelector('.domain').textContent=candidate.domain||'';
+if(candidate.secondaryAsset){box('.secondary',format.secondaryHero).querySelector('img').src=candidate.secondaryAsset}else document.querySelector('.secondary').remove();
+if(candidate.secondaryAsset&&format.arrow)box('.link-arrow',format.arrow);else document.querySelector('.link-arrow').remove();
+const signature=box('.signature',format.signature);signature.textContent=brand.signature;
+if(!brand.signature)signature.remove();else signature.style.fontSize=(format.signatureSize??format.metaSize)+'px';
+document.querySelector('.category').style.fontSize=format.metaSize+'px';
+window.coverReady=(async()=>{
+ await document.fonts.load('900 '+format.headlineSize+'px CoverSans');await document.fonts.load('500 '+format.subheadSize+'px CoverSans');await document.fonts.load('600 '+format.metaSize+'px CoverSans');await document.fonts.ready;
+ await Promise.all([...document.images].map(img=>img.decode()));
+ return true;
+})();
+window.inspectCover=()=>{
+ const errors=[];const bounds=cover.getBoundingClientRect();
+ // Measure each text rectangle before rotation, then transform its four corners.
+ // A rotated rectangle's axis-aligned envelope includes empty corner space.
+ const headline=document.querySelector('.headline');
+ const matrix=new DOMMatrix(getComputedStyle(headline).transform),originalTransform=headline.style.transform;
+ headline.style.transform='none';
+ const origin=headline.getBoundingClientRect(),texts=[];
+ try{for(const el of document.querySelectorAll('[data-check]')){
+  if(!el.textContent||!el.getClientRects().length)continue;
+  const range=document.createRange();range.selectNodeContents(el);const rect=range.getBoundingClientRect();
+  const points=[[rect.left,rect.top],[rect.right,rect.top],[rect.right,rect.bottom],[rect.left,rect.bottom]].map(([x,y])=>{
+   if(!headline.contains(el))return {x,y};
+   const p=matrix.transformPoint({x:x-origin.left,y:y-origin.top});return {x:origin.left+p.x,y:origin.top+p.y};
+  });
+  const left=Math.min(...points.map(p=>p.x)),right=Math.max(...points.map(p=>p.x)),top=Math.min(...points.map(p=>p.y)),bottom=Math.max(...points.map(p=>p.y));
+  texts.push({el,points,rect:{left,right,top,bottom,width:right-left,height:bottom-top}});
+ }}finally{headline.style.transform=originalTransform}
+ for(const {el,rect:r} of texts){
+  if(r.left<bounds.left+format.safeMargin||r.right>bounds.right-format.safeMargin||r.top<bounds.top+format.safeMargin||r.bottom>bounds.bottom-format.safeMargin)errors.push(el.dataset.check+': outside safe margin');
+  if(el.closest('.copy')&&(r.right>document.querySelector('.copy').getBoundingClientRect().right+1||r.bottom>document.querySelector('.copy').getBoundingClientRect().bottom+1))errors.push(el.dataset.check+': text overflow; shorten or rebreak headline');
+  if(el.dataset.check==='signature'&&r.right>el.getBoundingClientRect().right+1)errors.push('signature: text overflow; shorten brand name');
+ }
+ if(!document.fonts.check('900 '+format.headlineSize+'px CoverSans'))errors.push('font did not load');
+ for(const img of document.images)if(!img.naturalWidth)errors.push('artwork did not load');
+ // Check artwork alpha only inside the actual rotated text regions.
+ const canvas=document.createElement('canvas');canvas.width=format.width;canvas.height=format.height;
+ const ctx=canvas.getContext('2d',{willReadFrequently:true});
+ for(const img of document.images){
+  const box=img.getBoundingClientRect();const scale=Math.min(box.width/img.naturalWidth,box.height/img.naturalHeight);
+  const width=img.naturalWidth*scale,height=img.naturalHeight*scale;
+  for(const {el,points,rect:r} of texts){
+   ctx.clearRect(0,0,canvas.width,canvas.height);ctx.save();ctx.beginPath();
+   points.forEach((p,i)=>i?ctx.lineTo(p.x-bounds.left,p.y-bounds.top):ctx.moveTo(p.x-bounds.left,p.y-bounds.top));ctx.closePath();ctx.clip();
+   ctx.drawImage(img,box.left-bounds.left+(box.width-width)/2,box.top-bounds.top+(box.height-height)/2,width,height);ctx.restore();
+   const left=Math.max(0,Math.floor(r.left-bounds.left)),top=Math.max(0,Math.floor(r.top-bounds.top));
+   const w=Math.min(canvas.width-left,Math.ceil(r.right-bounds.left)-left),h=Math.min(canvas.height-top,Math.ceil(r.bottom-bounds.top)-top);
+   if(w<=0||h<=0)continue;const pixels=ctx.getImageData(left,top,w,h).data;
+   for(let i=3;i<pixels.length;i+=4)if(pixels[i]>=96){errors.push(el.dataset.check+': visible artwork overlaps text');break}
+  }
+ }
+ for(const el of document.querySelectorAll('.hero,.secondary,.link-arrow')){const r=el.getBoundingClientRect();if(r.left<bounds.left+format.safeMargin||r.right>bounds.right-format.safeMargin||r.top<bounds.top+format.safeMargin||r.bottom>bounds.bottom-format.safeMargin)errors.push('artwork outside safe margin')}
+ const headlineAngle=Math.round(Math.atan2(matrix.b,matrix.a)*180/Math.PI*100)/100;
+ return {errors,width:bounds.width,height:bounds.height,headlineAngle,headlineSize:format.headlineSize,emphasisSize:format.emphasisSize??format.headlineSize,signatureSize:format.signatureSize??format.metaSize,font:'CoverSans',text:[...document.querySelectorAll('[data-check]')].map(el=>el.textContent)};
+};
+</script></body></html>

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "title": "自然博物馆标准封面",
+  "sourceVideo": "用户提供的 nature-museum-narrated.mp4（约68.167秒）",
+  "recommendedId": "standard",
+  "durationLabel": "01:08",
+  "candidates": [
+    {
+      "id": "standard",
+      "name": "图1风格 · 标准封面",
+      "category": "亲子科普",
+      "headline": [
+        "把自然博物馆",
+        "搬进家里"
+      ],
+      "subhead": "陪孩子，从蝴蝶开始观察",
+      "asset": "butterfly-flat.png",
+      "secondaryAsset": "caterpillar-flat.png",
+      "layout": "object",
+      "reason": "用户指定沿用图1的标题、平涂插画与饱满构图，按图2固定字体、层级和布局。"
+    }
+  ]
+}

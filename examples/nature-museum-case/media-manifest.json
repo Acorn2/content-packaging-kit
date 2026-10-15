@@ -1,0 +1,43 @@
+{
+  "video": {
+    "file": "nature-museum-narrated.mp4",
+    "original_filename": "nature-museum-narrated.mp4",
+    "source": "用户提供的 Frame Loom 自然博物馆案例视频",
+    "size_bytes": 4693884,
+    "sha256": "2d9cef5787c48640414526a180fab95db5067f1b14f7c01c3833d6166b99eb16",
+    "duration_seconds": 68.166667,
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1920,
+        "height": 1080,
+        "r_frame_rate": "30/1",
+        "side_data_list": [
+          {}
+        ]
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "copied_without_reencoding": true
+  },
+  "cover": {
+    "file": "cover-4x3.png",
+    "source": "本项目对话中制作的宋体精修版",
+    "width": 1600,
+    "height": 1200,
+    "size_bytes": 582874,
+    "sha256": "3f475175980479ff228d88f98fab973d5818db266bfff0218cddf6d23c1c71ae"
+  },
+  "poster": {
+    "file": "video-poster.jpg",
+    "requested_time_seconds": 20,
+    "note": "采样请求位置，不声称逐帧精确时间码。",
+    "sha256": "b8cb0d60f023c6d9be5c3af46801eaddd06cfcde4005244c7d31788f7387aa78"
+  },
+  "scope": "输入视频与4:3封面效果展示；未提供3:4，未发布，未验证传播效果。"
+}

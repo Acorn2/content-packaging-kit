@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "id": "hresh-cover-v2",
+  "signature": "Hresh赫什",
+  "palette": {
+    "bg": "#FEFCF6",
+    "ink": "#1A1A2E",
+    "accent": "#2B7FD8",
+    "marker": "#F4D758",
+    "muted": "#4A4A5A",
+    "surface": "#FAF6EB"
+  },
+  "font": {
+    "file": "../../../assets/cover-system/fonts/SourceHanSansCN-VF.woff2",
+    "license": "../../../assets/cover-system/fonts/OFL.txt",
+    "sha256": "f971e3bff46f76b49e1d5510556c2297c618ec4b491a295a4e741cdd38257799"
+  },
+  "formats": {
+    "4x3": {
+      "width": 1600,
+      "height": 1200,
+      "headlineSize": 112,
+      "subheadSize": 36,
+      "metaSize": 28,
+      "safeMargin": 64,
+      "category": {
+        "left": 80,
+        "top": 92,
+        "width": 740,
+        "height": 48
+      },
+      "copy": {
+        "left": 80,
+        "top": 280,
+        "width": 740,
+        "height": 530
+      },
+      "hero": {
+        "left": 860,
+        "top": 225,
+        "width": 660,
+        "height": 780
+      },
+      "signature": {
+        "left": 80,
+        "top": 1060,
+        "width": 1040,
+        "height": 48
+      }
+    },
+    "3x4": {
+      "width": 1200,
+      "height": 1600,
+      "headlineSize": 112,
+      "subheadSize": 36,
+      "metaSize": 28,
+      "safeMargin": 64,
+      "category": {
+        "left": 80,
+        "top": 92,
+        "width": 1040,
+        "height": 48
+      },
+      "copy": {
+        "left": 80,
+        "top": 240,
+        "width": 1040,
+        "height": 400
+      },
+      "hero": {
+        "left": 140,
+        "top": 660,
+        "width": 920,
+        "height": 710
+      },
+      "signature": {
+        "left": 80,
+        "top": 1460,
+        "width": 1040,
+        "height": 48
+      }
+    }
+  }
+}

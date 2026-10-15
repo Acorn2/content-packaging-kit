@@ -7,3 +7,10 @@ preferences.json
 # 临时文件
 *.tmp
 *.log
+
+# 本地验证产物
+.tmp/
+
+# 本地生成结果与 IDE 配置
+/outputs/
+/.idea/

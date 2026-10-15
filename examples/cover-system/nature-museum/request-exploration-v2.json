@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "title": "儿童3D自然博物馆",
+  "sourceVideo": "用户提供的 nature-museum-narrated.mp4（约68.167秒，视频不随本示例打包）",
+  "recommendedId": "museum",
+  "candidates": [
+    {
+      "id": "change",
+      "name": "A · 蝴蝶变化",
+      "category": "亲子科普",
+      "headline": [
+        "毛毛虫",
+        "怎么变蝴蝶？"
+      ],
+      "subhead": "陪孩子对照四个生命阶段",
+      "asset": "nature.png",
+      "layout": "object",
+      "reason": "用孩子会问的问题制造好奇；视频的四阶段图解承接。偏蝴蝶科普，网站资源感较弱。"
+    },
+    {
+      "id": "museum",
+      "name": "B · 网页博物馆",
+      "category": "网站分享",
+      "headline": [
+        "这座博物馆",
+        "开在网页里"
+      ],
+      "subhead": "从蝴蝶开始，陪孩子观察自然",
+      "asset": "nature.png",
+      "layout": "window",
+      "domain": "naturemuseum.top",
+      "reason": "先说明这是一个可以访问的网站，再用蝴蝶引出观察内容；最贴近这条视频的资源推荐用途。"
+    },
+    {
+      "id": "together",
+      "name": "C · 亲子观察",
+      "category": "亲子观察",
+      "headline": [
+        "陪孩子",
+        "找一个新发现"
+      ],
+      "subhead": "一只蝴蝶，就是聊天的起点",
+      "asset": "family.png",
+      "layout": "people",
+      "reason": "突出亲子交流与参与感；视频有对应人物场景和引导问题，资源入口的辨识度较弱。"
+    }
+  ],
+  "durationLabel": "01:08"
+}

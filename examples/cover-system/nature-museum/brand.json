@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "id": "hresh-flat-cover-v3",
+  "signature": "Hresh赫什",
+  "palette": {
+    "bg": "#FEFCF6",
+    "ink": "#1A1A2E",
+    "accent": "#2B7FD8",
+    "marker": "#F4D758",
+    "muted": "#4A4A5A",
+    "surface": "#FAF6EB"
+  },
+  "font": {
+    "file": "../../../assets/cover-system/fonts/SourceHanSansCN-VF.woff2",
+    "license": "../../../assets/cover-system/fonts/OFL.txt",
+    "sha256": "f971e3bff46f76b49e1d5510556c2297c618ec4b491a295a4e741cdd38257799"
+  },
+  "formats": {
+    "4x3": {
+      "width": 1600,
+      "height": 1200,
+      "headlineSize": 142,
+      "subheadSize": 36,
+      "metaSize": 28,
+      "safeMargin": 72,
+      "category": {
+        "left": 72,
+        "top": 112,
+        "width": 840,
+        "height": 48
+      },
+      "copy": {
+        "left": 72,
+        "top": 250,
+        "width": 840,
+        "height": 530
+      },
+      "hero": {
+        "left": 850,
+        "top": 150,
+        "width": 678,
+        "height": 670
+      },
+      "signature": {
+        "left": 72,
+        "top": 1080,
+        "width": 650,
+        "height": 44
+      },
+      "signatureSize": 26,
+      "emphasisSize": 196,
+      "headlineLeading": 1.08,
+      "copyGap": 28,
+      "secondaryHero": {
+        "left": 790,
+        "top": 780,
+        "width": 738,
+        "height": 348
+      },
+      "arrow": {
+        "left": 1320,
+        "top": 720,
+        "width": 180,
+        "height": 180
+      }
+    },
+    "3x4": {
+      "width": 1200,
+      "height": 1600,
+      "headlineSize": 162,
+      "subheadSize": 36,
+      "metaSize": 28,
+      "safeMargin": 72,
+      "category": {
+        "left": 72,
+        "top": 104,
+        "width": 1056,
+        "height": 48
+      },
+      "copy": {
+        "left": 72,
+        "top": 198,
+        "width": 1056,
+        "height": 510
+      },
+      "hero": {
+        "left": 450,
+        "top": 725,
+        "width": 678,
+        "height": 590
+      },
+      "signature": {
+        "left": 72,
+        "top": 1480,
+        "width": 650,
+        "height": 44
+      },
+      "signatureSize": 26,
+      "emphasisSize": 196,
+      "headlineLeading": 1.08,
+      "copyGap": 28,
+      "secondaryHero": {
+        "left": 72,
+        "top": 1190,
+        "width": 738,
+        "height": 280
+      },
+      "arrow": {
+        "left": 910,
+        "top": 1320,
+        "width": 145,
+        "height": 145
+      }
+    }
+  }
+}
